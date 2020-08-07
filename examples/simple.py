@@ -6,5 +6,6 @@ env = environs.Env()
 env.read_env()
 
 bot = Bot(env("TOKEN"))
+admin_id = env.int("ADMIN_ID")
 
-print(bot.request("getMe"))
+# === #
