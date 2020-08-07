@@ -1,0 +1,2 @@
+class HttpMethodNotAllowed(BaseException):
+    pass
