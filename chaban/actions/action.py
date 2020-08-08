@@ -1,3 +1,3 @@
 class Action:
-    def act(self, message):
+    def act(self, message, *args, **kwargs):
         ...
