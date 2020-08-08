@@ -2,10 +2,10 @@ import os
 import typing as typ
 from pathlib import Path
 
+from chaban.core.exceptions import ImproperlyConfiguredError
 from chaban.utils.singleton import SingletonMixin
 
 from . import global_settings
-from .core.exceptions import ImproperlyConfiguredError
 
 
 class Settings(SingletonMixin):
