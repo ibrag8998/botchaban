@@ -1,6 +1,7 @@
 import re
 import typing as typ
 
+from chaban.actions.action import Action
 from chaban.utils.singleton import SingletonMixin
 
 
@@ -47,13 +48,15 @@ class MetaMH(type):
 
 
 class BaseMH(metaclass=MetaMH):
+    action: typ.Type[Action]
+
     class Meta:
         abstract = True
 
     def __init__(self, *args, **kwargs):
         self._meta = self.Meta()
 
-    def _can_handle(self, message_text: str) -> bool:
+    def can_handle(self, message_text: str) -> bool:
         if re.search(self._regex, message_text) is None:
             return False
         return True

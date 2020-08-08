@@ -12,8 +12,14 @@ admin_id = env.int("ADMIN_ID")
 # === #
 
 
+def respond(message):
+    print(1)
+
+
 class StartCommandMH(CommandMH):
     command = "start"
+
+    action = respond
 
 
 bot.start_polling()
