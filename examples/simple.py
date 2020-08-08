@@ -14,3 +14,6 @@ admin_id = env.int("ADMIN_ID")
 
 class StartCommandMH(CommandMH):
     command = "start"
+
+
+bot.start_polling()

@@ -1,2 +1,6 @@
 class HttpMethodNotAllowed(BaseException):
-    pass
+    ...
+
+
+class TelegramAPIError(BaseException):
+    ...
