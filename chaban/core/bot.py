@@ -2,6 +2,8 @@ import typing
 
 import httpx
 
+from chaban.config import settings
+
 from .exceptions import HttpMethodNotAllowed, TelegramAPIError
 from .tg_methods import TelegramMethodsMixin
 
@@ -9,11 +11,8 @@ from .tg_methods import TelegramMethodsMixin
 class Bot(TelegramMethodsMixin):
     _allowed_http_methods = ["get", "post"]
 
-    def __init__(self, token: str):
-        if not isinstance(token, str):
-            raise TypeError(":param token: must a be string")
-
-        self._endpoint = "https://api.telegram.org/bot{}/".format(token)
+    def __init__(self):
+        self._endpoint = "https://api.telegram.org/bot{}/".format(settings.TOKEN)
 
     def _build_url(self, method_name: str) -> str:
         return self._endpoint + method_name.lstrip("/")
