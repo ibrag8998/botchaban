@@ -1,8 +1,8 @@
 import re
 import typing as typ
 
-from chaban.actions.action import Action
-from chaban.utils.singleton import SingletonMixin
+from chaban.actions import Action
+from chaban.utils import SingletonMixin
 
 
 class MetaMH(type):

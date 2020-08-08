@@ -3,12 +3,13 @@ import typing
 import httpx
 
 from chaban.config import settings
+from chaban.utils import SingletonMixin
 
 from .exceptions import HttpMethodNotAllowed, TelegramAPIError
 from .tg_methods import TelegramMethodsMixin
 
 
-class Bot(TelegramMethodsMixin):
+class Bot(TelegramMethodsMixin, SingletonMixin):
     _allowed_http_methods = ["get", "post"]
 
     def __init__(self):

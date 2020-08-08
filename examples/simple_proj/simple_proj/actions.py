@@ -1,4 +1,4 @@
-from chaban.actions.action import Action
+from chaban.actions import Action
 
 
 class StartCommandAction(Action):
