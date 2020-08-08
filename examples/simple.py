@@ -14,6 +14,3 @@ admin_id = env.int("ADMIN_ID")
 
 class StartCommandMH(CommandMH):
     command = "start"
-
-
-print(StartCommandMH.Meta.abstract)

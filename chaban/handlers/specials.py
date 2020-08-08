@@ -1,9 +1,9 @@
 import typing as typ
 
-from .mh import MH
+from .base import BaseMH
 
 
-class RegexMH(MH):
+class RegexMH(BaseMH):
     regex: str
 
     class Meta:
@@ -14,7 +14,7 @@ class RegexMH(MH):
         return self.regex
 
 
-class CommandMH(MH):
+class CommandMH(BaseMH):
     command: str
     args: typ.List[str] = []
     must_start_with_command: bool = True
