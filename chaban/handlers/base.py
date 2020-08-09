@@ -4,6 +4,8 @@ import typing as typ
 from chaban.actions import Action
 from chaban.utils import SingletonMixin
 
+from .exceptions import NoHandlersRegistered
+
 
 class MetaMH(type):
     class __DefaultMeta:
@@ -77,8 +79,15 @@ class _MHRegistry(SingletonMixin):
     def mhs(self) -> _MHList:
         return self._mhs[:]
 
-    def add(self, mh: _MHType):
+    def add(self, mh: _MHType) -> None:
         self._mhs.append(mh)
+
+    def get_mh(self, message):
+        if len(self._mhs) == 0:
+            raise NoHandlersRegistered("You didn't registered any message handlers")
+
+        for mh in self._mhs:
+            print(mh)
 
 
 mh_registry = _MHRegistry()

@@ -14,8 +14,7 @@ def run():
     # debugging purposes ...
     tbot = TelegramBot()
 
-    for d in tbot.start_polling():
-        print(d)
+    tbot.start_polling()
 
 
 if __name__ == "__main__":
