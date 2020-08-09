@@ -1,4 +1,4 @@
-from chaban.handlers import CommandMH
+from chaban import CommandMH
 
 from .actions import StartCommandAction
 
