@@ -11,6 +11,7 @@ from . import global_settings
 class Settings(SingletonMixin):
     TOKEN: str
     BASE_DIR: typ.Union[str, Path]
+    PACKAGES: typ.List[str]
 
     _settings_module = None
     _cache: typ.Dict[str, typ.Any] = {}

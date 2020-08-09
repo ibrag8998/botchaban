@@ -1,19 +1,15 @@
 import os
-import sys
-from pathlib import Path
 
-from chaban.core.telegram_bot import TelegramBot
+from chaban.bots import TelegramBot
+from chaban.core.runner import runner
 
 
 def run():
     os.environ["CHABAN_SETTINGS_MODULE"] = "settings"
 
-    root_path = Path(__file__).parent
-    sys.path.append(root_path / "simple_proj")
+    runner.run(__file__)
 
-    # debugging purposes ...
     tbot = TelegramBot()
-
     tbot.start_polling()
 
 

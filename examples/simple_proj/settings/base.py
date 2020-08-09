@@ -11,4 +11,8 @@ TOKEN = env("TOKEN")
 if TOKEN is None:
     raise EnvironmentError("TOKEN env variable is required, but not set")
 
+PACKAGES = [
+    "simple_proj",
+]
+
 ADMIN_ID = env.int("ADMIN_ID")

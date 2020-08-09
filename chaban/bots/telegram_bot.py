@@ -3,11 +3,11 @@ import typing as typ
 import httpx
 
 from chaban.config import global_settings, settings
+from chaban.core.exceptions import HttpMethodNotAllowed, TelegramAPIError
 from chaban.handlers.base import mh_registry
 from chaban.utils import SingletonMixin
 
-from .exceptions import HttpMethodNotAllowed, TelegramAPIError
-from .tg_methods import TelegramMethodsMixin
+from .telegram_methods import TelegramMethodsMixin
 
 
 class TelegramBot(TelegramMethodsMixin, SingletonMixin):
@@ -48,7 +48,7 @@ class TelegramBot(TelegramMethodsMixin, SingletonMixin):
 
     def start_polling(self):
         for message in self._poll_updates():
-            mh_registry.get_mh(message)
+            print(mh_registry.get_mh(message))
 
     def _poll_updates(self) -> typ.Iterator[typ.Dict[str, typ.Any]]:
         """
