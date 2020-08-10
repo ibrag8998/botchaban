@@ -9,9 +9,9 @@ class RegexMH(BaseMH):
     class Meta:
         abstract = True
 
-    @property
-    def _regex(self) -> str:
-        return self.regex
+    @classmethod
+    def _get_regex(cls) -> str:
+        return cls.regex
 
 
 class CommandMH(BaseMH):
@@ -23,12 +23,12 @@ class CommandMH(BaseMH):
     class Meta:
         abstract = True
 
-    @property
-    def _regex(self) -> str:
-        n_args = len(self.args)
+    @classmethod
+    def _get_regex(cls) -> str:
+        n_args = len(cls.args)
         return "{}/{}{}{}".format(
-            "^" if self.must_start_with_command else "",
-            self.command.lstrip("/"),
+            "^" if cls.must_start_with_command else "",
+            cls.command.lstrip("/"),
             r" [0-9a-zA-Z_]+" * n_args,
-            "$" if not self.allow_trailing_symbols else "",
+            "$" if not cls.allow_trailing_symbols else "",
         )

@@ -55,16 +55,14 @@ class BaseMH(metaclass=MetaMH):
     class Meta:
         abstract = True
 
-    def __init__(self, *args, **kwargs):
-        self._meta = self.Meta()
-
-    def can_handle(self, message_text: str) -> bool:
-        if re.search(self._regex, message_text) is None:
+    @classmethod
+    def can_handle(cls, message_text: str) -> bool:
+        if re.search(cls._get_regex(), message_text) is None:
             return False
         return True
 
-    @property
-    def _regex(self) -> str:
+    @classmethod
+    def _get_regex(cls) -> str:
         ...
 
 
@@ -75,19 +73,47 @@ _MHList = typ.List[_MHType]
 class _MHRegistry(SingletonMixin):
     _mhs: _MHList = []
 
+    def get_handler_and_handle(self, message) -> None:
+        mh = self._get_mh(message)
+
+        if mh is None:
+            return
+
+        mh.action.act(message)
+
     @property
     def mhs(self) -> _MHList:
         return self._mhs[:]
 
     def add(self, mh: _MHType) -> None:
+        """
+        Add message handler like this:
+
+        ```
+            mh_registry.add(MyMH)
+        ```
+        """
         self._mhs.append(mh)
 
-    def get_mh(self, message):
-        if len(self._mhs) == 0:
+    def __le__(self, mh: _MHType) -> None:
+        """
+        Add message handler like this:
+
+        ```
+            mh_registry <= MyMH
+        ```
+        """
+        self.add(mh)
+
+    def _get_mh(self, message) -> typ.Optional[_MHType]:
+        if len(self.mhs) == 0:
             raise NoHandlersRegistered("You didn't registered any message handlers")
 
-        for mh in self._mhs:
-            print(mh)
+        for mh in self.mhs:
+            if mh.can_handle(message["text"]):
+                return mh
+
+        return None
 
 
 mh_registry = _MHRegistry()

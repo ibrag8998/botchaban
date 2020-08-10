@@ -48,7 +48,7 @@ class TelegramBot(TelegramMethodsMixin, SingletonMixin):
 
     def start_polling(self):
         for message in self._poll_updates():
-            print(mh_registry.get_mh(message))
+            mh_registry.get_handler_and_handle(message)
 
     def _poll_updates(self) -> typ.Iterator[typ.Dict[str, typ.Any]]:
         """

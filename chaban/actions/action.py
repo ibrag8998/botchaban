@@ -1,3 +1,4 @@
 class Action:
-    def act(self, message, *args, **kwargs):
+    @classmethod
+    def act(cls, message, *args, **kwargs):
         ...

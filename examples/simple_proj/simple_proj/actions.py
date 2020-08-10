@@ -2,5 +2,6 @@ from chaban import Action
 
 
 class StartCommandAction(Action):
-    def act(self, message):
+    @classmethod
+    def act(cls, message):
         print(message)

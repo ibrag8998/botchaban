@@ -3,6 +3,7 @@ import sys
 import typing as typ
 from pathlib import Path
 
+from chaban.bots import TelegramBot
 from chaban.config import settings
 from chaban.utils import SingletonMixin
 
@@ -20,6 +21,13 @@ class _Runner(SingletonMixin):
 
         # do all the job related to settings.PACKAGES
         self._handle_packages(client_run_file.parent)
+
+        # start telegram bot
+        self._start_telegram_bot()
+
+    @staticmethod
+    def _start_telegram_bot():
+        TelegramBot().start_polling()
 
     def _handle_packages(self, client_root_path: Path) -> None:
         """
