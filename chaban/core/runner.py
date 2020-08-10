@@ -1,3 +1,4 @@
+import pkgutil
 import sys
 import typing as typ
 from pathlib import Path
@@ -21,6 +22,9 @@ class _Runner(SingletonMixin):
         self._handle_packages(client_run_file.parent)
 
     def _handle_packages(self, client_root_path: Path) -> None:
+        """
+        Do all the job related to settings.PACKAGES
+        """
         # get package list from settings
         pkgs = settings.PACKAGES[:]
         for pkg_name in pkgs:
@@ -28,11 +32,24 @@ class _Runner(SingletonMixin):
             pkg_path = str(client_root_path / pkg_name)
             # append each package to sys.path
             sys.path.append(pkg_path)
-            # plain import each package to handle message handlers, actions, etc
-            pkg = __import__(pkg_path)
-            print(dir(pkg))
-            print(pkg.__path__)
-            print(pkg.__package__)
+            # load package
+            self._load_pkg(pkg_path)
+
+    def _load_pkg(self, name: str) -> None:
+        """
+        Recursively load package with all its modules given package's name.
+        """
+        # import the package
+        pkg = __import__(name)
+        for _, modname, is_pkg in pkgutil.iter_modules(
+            pkg.__path__, pkg.__name__ + "."
+        ):
+            # if is_pkg, recursively load it
+            if is_pkg:
+                self._load_pkg(modname)
+            # else just import it
+            else:
+                __import__(modname)
 
 
 runner = _Runner()
