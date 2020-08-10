@@ -9,7 +9,7 @@ from . import global_settings
 
 
 class Settings(SingletonMixin):
-    TOKEN: str
+    TELEGRAM_TOKEN: str
     BASE_DIR: typ.Union[str, Path]
     PACKAGES: typ.List[str]
 

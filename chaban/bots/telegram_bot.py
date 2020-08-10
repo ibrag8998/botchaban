@@ -16,7 +16,8 @@ class TelegramBot(TelegramMethodsMixin, SingletonMixin):
 
     All methods related to telegram api are defined in ``TelegramMethodsMixin``.
 
-    On init, get ``TOKEN`` from settings. Settings are getting that token from env.
+    On init, get ``TELEGRAM_TOKEN`` from settings.
+    Settings are getting that token from env.
     """
 
     _allowed_http_methods = global_settings.TELEGRAM_ALLOWED_HTTP_METHODS
@@ -24,7 +25,9 @@ class TelegramBot(TelegramMethodsMixin, SingletonMixin):
     def __init__(self):
         # bot don't need the token as a separate constant, token is only used as part of
         # the telegram api endpoint url
-        self._endpoint = "https://api.telegram.org/bot{}/".format(settings.TOKEN)
+        self._endpoint = "https://api.telegram.org/bot{}/".format(
+            settings.TELEGRAM_TOKEN
+        )
 
     def _build_url(self, method_name: str) -> str:
         return self._endpoint + method_name.lstrip("/")
