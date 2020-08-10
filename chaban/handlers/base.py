@@ -50,7 +50,7 @@ class MetaMH(type):
 
 
 class BaseMH(metaclass=MetaMH):
-    action: typ.Type[Action]
+    _action: Action
 
     class Meta:
         abstract = True
@@ -79,7 +79,7 @@ class _MHRegistry(SingletonMixin):
         if mh is None:
             return
 
-        mh.action.act(message)
+        mh._action.act(message)
 
     @property
     def mhs(self) -> _MHList:

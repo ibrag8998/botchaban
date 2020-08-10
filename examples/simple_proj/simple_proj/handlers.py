@@ -5,4 +5,4 @@ from .actions import StartCommandAction
 
 class StartCommandMH(CommandMH):
     command = "start"
-    action = StartCommandAction
+    _action = StartCommandAction()
