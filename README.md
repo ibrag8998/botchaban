@@ -1,6 +1,6 @@
 # Chaban
 
-Python chat-bot framework.
+Python chat-bot framework. Uses very much concepts from [django](https://github.com/django/django/).
 
 ## Links
 
@@ -22,43 +22,75 @@ pip install chaban
 
 ### Project structure
 
-For now, CLI is not developed, so you need to make projects by yourself :(.
-Recommended project structure:
+To bootstrap a new project, I recommend using [cookiecutter](https://github.com/cookiecutter/cookiecutter).
+
+```shell
+pip install cookiecutter
+```
+
+For now, CLI is not developed, but I hope it will be available soon.
+
+Now, run this command to get your chaban template:
+
+```shell
+cookiecutter gh:ibrag8998/cookiecutter-chaban
+```
+
+And answer to the question it asks :D.
+
+The project looks like this:
 
 ```
-project_name
-+-- project_name
+project_slug
++-- project_slug
 |   +-- __init__.py
 |   +-- handlers.py
 |   +-- actions.py
+|   +-- text.py
 +-- settings
-|   +-- __init__.py (only this one required, others are optional)
+|   +-- __init__.py
 |   +-- base.py
-|   +-- ...
+|   +-- dev.py
++-- requirements
+|   +-- base.txt
+|   +-- testing.txt
+|   +-- local.txt
++-- scripts
+|   +-- installdeps.sh
+|   +-- mkenv.sh
 +-- run.py
-+-- .env (recommended)
++-- ...
 ```
+
+Now run `mkenv.sh` script to make `.env` file which stores some configuration and secret keys:
+
+```shell
+cd scripts
+./mkenv.sh
+```
+
+- `settings/` contains any settings you want, but there some required ones, like `DEBUG`.
+Put base settings in `base.py` and development-only ones in `dev.py`, the rest will be done for you.
+How? Read `settings/__init__.py` file.
+
+- `requirements/` contains separate requirements. `base.txt` are base, project will not work
+without them. `testing.txt` only used for tests. `local.txt` contains requirements for direct developer,
+for example: linter, formatter.
+
+- `scripts/` contains bash scripts to manage your project.
+
+- `run.py` is a file that you will run to start up your bot.
+
+- `project_slug/` is actual core:
+
+  - `handlers.py` contains message handlers.
+  - `actions.py` contains logic that will be invoked by message handler.
+  - `text.py` contains text snippet to send in messages.
 
 ### Settings and config
 
-In your settings, you just need to specify `TELEGRAM_TOKEN: str` like this:
-
-```python
-TELEGRAM_TOKEN = ...  # your token here, recommended to store it in env variable
-```
-
-Also, you need to specify `PACKAGES: List[str]`. For the project structure you can see above,
-this setting should look like this:
-
-```python
-PACKAGES = [
-    'project_name',
-]
-```
-
 ### Actual code
 
-In your nested `project_name/` dir, you can see `handlers.py` and `actions.py`.
 First, define a message handler in `handlers.py` like this:
 
 ```python
@@ -99,10 +131,6 @@ python run.py
 ```
 
 Write to your bot with message "**/start**" and see it works.
-
-### Note
-
-The CLI will be available soon (I hope) and the project organization will be much easier.
 
 ## Contributing
 
