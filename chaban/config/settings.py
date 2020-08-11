@@ -3,7 +3,7 @@ import typing as typ
 from pathlib import Path
 
 from chaban.core.exceptions import ImproperlyConfiguredError
-from chaban.utils.singleton import SingletonMixin
+from chaban.utils import SingletonMixin
 
 from . import global_settings
 
