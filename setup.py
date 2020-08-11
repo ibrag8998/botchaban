@@ -8,7 +8,7 @@ with open("requirements/base.txt") as f:
 
 setup(
     name="chaban",
-    version="0.0.2",
+    version="0.0.2.1",
     packages=find_packages(),
     author="Ibrahim Gadzhimagomedov",
     author_email="ibragdzh@gmail.com",
