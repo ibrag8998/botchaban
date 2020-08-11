@@ -87,8 +87,6 @@ for example: linter, formatter.
   - `actions.py` contains logic that will be invoked by message handler.
   - `text.py` contains text snippet to send in messages.
 
-### Settings and config
-
 ### Actual code
 
 First, define a message handler in `handlers.py` like this:
