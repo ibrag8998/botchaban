@@ -1,3 +1,10 @@
 -r base.txt
 
 -r testing.txt
+
+mypy
+flake8-awesome
+black
+wheel
+setuptools
+
