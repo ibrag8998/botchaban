@@ -5,12 +5,12 @@ import httpx
 from chaban.config import global_settings, settings
 from chaban.core.exceptions import HttpMethodNotAllowed, TelegramAPIError
 from chaban.handlers.base import mh_registry
-from chaban.utils import SingletonMixin
+from chaban.utils import MetaSingleton
 
 from .telegram_methods import TelegramMethodsMixin
 
 
-class TelegramBot(TelegramMethodsMixin, SingletonMixin):
+class TelegramBot(TelegramMethodsMixin, metaclass=MetaSingleton):
     """
     Main telegram bot class.
 

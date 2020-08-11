@@ -1,1 +1,1 @@
-from .singleton import SingletonMixin
+from .singleton import MetaSingleton

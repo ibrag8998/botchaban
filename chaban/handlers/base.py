@@ -2,7 +2,7 @@ import re
 import typing as typ
 
 from chaban.actions import Action
-from chaban.utils import SingletonMixin
+from chaban.utils import MetaSingleton
 
 from .exceptions import NoHandlersRegistered
 
@@ -70,7 +70,7 @@ _MHType = typ.Type[BaseMH]
 _MHList = typ.List[_MHType]
 
 
-class _MHRegistry(SingletonMixin):
+class _MHRegistry(metaclass=MetaSingleton):
     _mhs: _MHList = []
 
     def get_handler_and_handle(self, message) -> None:

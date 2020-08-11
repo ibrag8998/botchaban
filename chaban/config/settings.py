@@ -3,12 +3,12 @@ import typing as typ
 from pathlib import Path
 
 from chaban.core.exceptions import ImproperlyConfiguredError
-from chaban.utils import SingletonMixin
+from chaban.utils import MetaSingleton
 
 from . import global_settings
 
 
-class Settings(SingletonMixin):
+class Settings(metaclass=MetaSingleton):
     TELEGRAM_TOKEN: str
     BASE_DIR: typ.Union[str, Path]
     PACKAGES: typ.List[str]

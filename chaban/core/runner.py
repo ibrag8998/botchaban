@@ -5,10 +5,10 @@ from pathlib import Path
 
 from chaban.bots import TelegramBot
 from chaban.config import settings
-from chaban.utils import SingletonMixin
+from chaban.utils import MetaSingleton
 
 
-class _Runner(SingletonMixin):
+class _Runner(metaclass=MetaSingleton):
     """
     Runner class to run your application
 
