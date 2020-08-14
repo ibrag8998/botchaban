@@ -1,5 +1,8 @@
+import typing as typ
+
+
 class Action:
-    def act(self, message, *args, **kwargs):
+    def act(self, message: typ.Dict[str, typ.Any]):
         ...
 
     @property

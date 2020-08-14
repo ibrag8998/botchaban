@@ -56,13 +56,7 @@ class BaseMH(metaclass=MetaMH):
         abstract = True
 
     @classmethod
-    def can_handle(cls, message_text: str) -> bool:
-        if re.search(cls._get_regex(), message_text) is None:
-            return False
-        return True
-
-    @classmethod
-    def _get_regex(cls) -> str:
+    def can_handle(cls, message: typ.Dict[str, typ.Any]) -> bool:
         ...
 
 
@@ -110,7 +104,7 @@ class _MHRegistry(metaclass=MetaSingleton):
             raise NoHandlersRegistered("You didn't registered any message handlers")
 
         for mh in self.mhs:
-            if mh.can_handle(message["text"]):
+            if mh.can_handle(message):
                 return mh
 
         return None
