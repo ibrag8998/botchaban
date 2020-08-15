@@ -10,7 +10,7 @@ class _BaseTextMH(BaseMH):
 
     @classmethod
     def can_handle(cls, message: typ.Dict[str, typ.Any]) -> bool:
-        message_text = message["text"]
+        message_text: str = cls.get_message_content(message, "text")  # type: ignore
         if re.search(cls._get_regex(), message_text) is None:
             return False
         return True

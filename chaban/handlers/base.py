@@ -59,6 +59,17 @@ class BaseMH(metaclass=MetaMH):
     def can_handle(cls, message: typ.Dict[str, typ.Any]) -> bool:
         ...
 
+    @classmethod
+    def get_message_content(
+        cls, message: typ.Dict[str, typ.Any], key: str, err_message: str = None
+    ) -> typ.Union[str, typ.Dict[str, typ.Any], typ.Any]:
+        try:
+            return message[key]
+        except KeyError:
+            if err_message is None:
+                err_message = "You specified wrong handler"
+            raise TypeError(err_message)
+
 
 _MHType = typ.Type[BaseMH]
 _MHList = typ.List[_MHType]

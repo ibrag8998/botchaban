@@ -7,6 +7,6 @@ class Action:
 
     @property
     def tbot(self):
-        from chaban.bots import TelegramBot
+        from chaban.bots import TelegramBot  # TODO
 
         return TelegramBot()
